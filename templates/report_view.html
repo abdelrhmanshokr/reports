@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+	view chart
+{% endblock %}
+
+
+{% block chartjs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+
+{% block body %}
+	<canvas id='chart' width='900' height='400'></canvas>
+	<!-- <script> 
+		var ctx = document.getElementById('chart').getContext('2d');
+		var lineChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: ['x', 'y'],
+				datasets: [
+					{
+						label: 'x',
+						data: {{ xdata | safe }}, 
+						fill: false,
+						borderColor: 'rgb(0, 0, 0)',
+						lineTension: 0.5
+					},
+					{
+						label: 'y',
+						data: {{ ydata | safe }}, 
+						fill: true,
+						borderColor: 'rgb(120, 130, 140)',
+						lineTension: 0.5
+					}
+				]
+			},
+			options: {
+				responsive: true
+			}
+		});
+	</script> -->
+
+	<!-- <script>
+		var totalData = {{ total_data | safe }} 
+		var xyValues = [
+		  {x:50, y:7},
+		  {x:60, y:8},
+		  {x:70, y:8},
+		  {x:80, y:9},
+		  {x:90, y:9},
+		  {x:100, y:9},
+		  {x:110, y:10},
+		  {x:120, y:11},
+		  {x:130, y:14},
+		  {x:140, y:14},
+		  {x:150, y:15}
+		];
+
+		var ctx = document.getElementById('chart').getContext('2d');
+		var scatterChart = new Chart(ctx, {
+			type: 'scatter',
+			data: {
+				labels: ['x', 'y'],
+				datasets: [{
+					pointRadius: 4,
+				    pointBackgroundColor: "rgba(0,0,255,1)",
+				    data: xyValues,
+				    showLine: true
+				}]
+			},
+			options: {
+				responsive: true
+			}
+		});
+	</script>-->
+
+	<!-- bar cahrt for the highest driver to the lowest -->
+	<script>
+		var driversNames = {{ drivers_names | safe }};
+		var total_cash = {{ total_cash | safe }};
+		var barColors = 'red';
+
+		new Chart("chart", {
+		  type: "bar",
+		  data: {
+		    labels: driversNames,
+		    datasets: [{
+		      backgroundColor: barColors,
+		      data: total_cash
+		    }]
+		  },
+		  options: {
+		    legend: {display: false},
+		    title: {
+		      display: true,
+		      text: "World Wine Production 2018"
+		    },
+		    responsive: true
+		  }
+		});
+</script>
+
+{% endblock %}
